@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand: hsl(220 100% 60%);
+  --color-brand-dark: hsl(220 100% 50%);
+  --color-surface: hsl(222 28% 10%);
+  --color-surface-2: hsl(222 28% 14%);
+  --color-surface-3: hsl(222 28% 18%);
+  --color-border: hsl(222 20% 22%);
+  --color-text: hsl(210 20% 95%);
+  --color-muted: hsl(210 12% 60%);
+  --color-success: hsl(142 71% 45%);
+  --color-danger: hsl(0 84% 60%);
+  --color-warning: hsl(38 92% 50%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+html { color-scheme: dark; }
+body { background: var(--color-surface); color: var(--color-text); font-family: var(--font-geist-sans), system-ui, sans-serif; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand); }
+
+@layer components {
+  .input {
+    @apply w-full rounded-xl border border-border bg-surface-3 px-4 py-2.5 text-sm text-text
+      placeholder:text-muted/60 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .btn-primary {
+    @apply rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white transition
+      hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-ghost {
+    @apply rounded-xl border border-border px-3 py-2 text-sm text-muted transition
+      hover:bg-surface-3 hover:text-text disabled:opacity-40;
+  }
+  .alert-error {
+    @apply rounded-lg border border-danger/20 bg-danger/10 px-3 py-2 text-sm text-danger;
+  }
 }
